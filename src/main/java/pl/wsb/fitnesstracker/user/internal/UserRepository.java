@@ -3,8 +3,10 @@ package pl.wsb.fitnesstracker.user.internal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.wsb.fitnesstracker.user.api.User;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 interface UserRepository extends JpaRepository<User, Long> {
 
@@ -19,5 +21,10 @@ interface UserRepository extends JpaRepository<User, Long> {
                 .filter(user -> Objects.equals(user.getEmail(), email))
                 .findFirst();
     }
-
+// szukanie po emilu bez rozróżniania liter
+    default List<User> findByEmailwocase(String emailFragment) {
+        return findAll().stream()
+                .filter(user -> user.getEmail().toLowerCase().contains(emailFragment.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 }

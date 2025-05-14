@@ -16,14 +16,30 @@ import java.util.Optional;
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
-
+    //dodanie
     @Override
     public User createUser(final User user) {
         log.info("Creating User {}", user);
         if (user.getId() != null) {
-            throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
+            throw new IllegalArgumentException("Can't Update");
         }
         return userRepository.save(user);
+    }
+    //aktualizacja
+    @Override
+    public User updateUser(final User user) {
+        log.info("Updating User {}", user);
+        if (user.getId() == null) {
+            throw new IllegalArgumentException("Can't create");
+        }
+        return userRepository.save(user);
+    }
+
+    //usuniecie
+    @Override
+    public void deleteUser(final Long userId) {
+        log.info("Deleting User ID {}", userId);
+        userRepository.deleteById(userId);
     }
 
     @Override
@@ -41,4 +57,8 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+    public List<User> findByEmail(final String emailFragment) {
+        return userRepository.findByEmailwocase(emailFragment);
+    }
+// trzeba dodac szukanie po wieku starszym niz zdefiniowano i do reszty te funkcje
 }
