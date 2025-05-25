@@ -21,10 +21,18 @@ interface UserRepository extends JpaRepository<User, Long> {
                 .filter(user -> Objects.equals(user.getEmail(), email))
                 .findFirst();
     }
-// szukanie po emilu bez rozróżniania liter
+
+    // szukanie po emilu bez rozróżniania liter
     default List<User> findByEmailwocase(String emailFragment) {
         return findAll().stream()
                 .filter(user -> user.getEmail().toLowerCase().contains(emailFragment.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+
+    // szukanie po fragmencie nazwy
+    default List<User> findByPartEmail(String emailFragment) {
+        return findAll().stream()
+                .filter(user -> user.getEmail() != null && user.getEmail().toLowerCase().contains(emailFragment.toLowerCase()))
+                .toList();
     }
 }

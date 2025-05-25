@@ -7,6 +7,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,21 +17,23 @@ import java.util.Optional;
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
+
     //dodanie
     @Override
     public User createUser(final User user) {
         log.info("Creating User {}", user);
         if (user.getId() != null) {
-            throw new IllegalArgumentException("Can't Update");
+            throw new IllegalArgumentException("Can't create");
         }
         return userRepository.save(user);
     }
+
     //aktualizacja
     @Override
     public User updateUser(final User user) {
         log.info("Updating User {}", user);
         if (user.getId() == null) {
-            throw new IllegalArgumentException("Can't create");
+            throw new IllegalArgumentException("Can't update");
         }
         return userRepository.save(user);
     }
@@ -60,5 +63,27 @@ class UserServiceImpl implements UserService, UserProvider {
     public List<User> findByEmail(final String emailFragment) {
         return userRepository.findByEmailwocase(emailFragment);
     }
-// trzeba dodac szukanie po wieku starszym niz zdefiniowano i do reszty te funkcje
+
+    //dodanie wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
+    @Override
+    public List<User> findUsersOlderThan(LocalDate date) {
+        return userRepository.findAll()
+                .stream()
+                .filter(user -> user.getBirthdate().isBefore(date))
+                .toList();
+    }
+
+    //wyszukiwanie użytkowników po e-mailu, bez rozroznienia wielkości liter
+    @Override
+    public List<User> findUsersByEmailWoCase(String emailFragment) {
+        return userRepository.findAll().stream()
+                .filter(user -> user.getEmail().toLowerCase().contains(emailFragment.toLowerCase()))
+                .toList();
+    }
+
+    // wyszukiwanie uzytkowników po fragmencie nazwy
+    @Override
+    public List<User> findUserByEmailFragment(String emailFragment) {
+        return userRepository.findByPartEmail(emailFragment);
+    }
 }
