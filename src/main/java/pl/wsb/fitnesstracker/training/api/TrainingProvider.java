@@ -1,7 +1,11 @@
 package pl.wsb.fitnesstracker.training.api;
 
+import pl.wsb.fitnesstracker.training.internal.ActivityType;
+import pl.wsb.fitnesstracker.training.internal.TrainingDto;
 import pl.wsb.fitnesstracker.user.api.User;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public interface TrainingProvider {
@@ -15,4 +19,11 @@ public interface TrainingProvider {
      */
     Optional<User> getTraining(Long trainingId);
 
+    List<Training> getAllTrainings();
+
+    List<Training> getAllTrainingsForDedicatedUser(Long userId);
+
+    List<Training> getAllFinishedTrainingsAfter(LocalDateTime afterDateTime);
+
+    List<Training> getAllTrainingByActivityType(ActivityType activityType);
 }

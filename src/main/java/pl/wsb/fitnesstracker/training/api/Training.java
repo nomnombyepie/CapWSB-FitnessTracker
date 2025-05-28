@@ -11,7 +11,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import java.util.Date;
 
 @Entity
-@Table(name = "trainings")
+@Table(name = "user_training")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
