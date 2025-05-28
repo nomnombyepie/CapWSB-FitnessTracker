@@ -20,8 +20,7 @@ class UserServiceImpl implements UserService, UserProvider {
 
     //dodanie
     @Override
-    public User createUser(final User user) {
-        log.info("Creating User {}", user);
+    public User crtUser(final User user) {log.info("Creating User {}", user);
         if (user.getId() != null) {
             throw new IllegalArgumentException("Can't create");
         }
@@ -30,8 +29,7 @@ class UserServiceImpl implements UserService, UserProvider {
 
     //aktualizacja
     @Override
-    public User updateUser(final User user) {
-        log.info("Updating User {}", user);
+    public User updUser(final User user) {log.info("Updating User {}", user);
         if (user.getId() == null) {
             throw new IllegalArgumentException("Can't update");
         }
@@ -40,10 +38,10 @@ class UserServiceImpl implements UserService, UserProvider {
 
     //usuniecie
     @Override
-    public void deleteUser(final Long userId) {
-        log.info("Deleting User ID {}", userId);
-        userRepository.deleteById(userId);
+    public void dltUser(final Long userId) {log.info("Deleting User ID {}", userId); userRepository.deleteById(userId);
     }
+
+
 
     @Override
     public Optional<User> getUser(final Long userId) {
@@ -60,30 +58,7 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
-    public List<User> findByEmail(final String emailFragment) {
-        return userRepository.findByEmailwocase(emailFragment);
-    }
-
-    //dodanie wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
+    // older than
     @Override
-    public List<User> findUsersOlderThan(LocalDate date) {
-        return userRepository.findAll()
-                .stream()
-                .filter(user -> user.getBirthdate().isBefore(date))
-                .toList();
-    }
-
-    //wyszukiwanie użytkowników po e-mailu, bez rozroznienia wielkości liter
-    @Override
-    public List<User> findUsersByEmailWoCase(String emailFragment) {
-        return userRepository.findAll().stream()
-                .filter(user -> user.getEmail().toLowerCase().contains(emailFragment.toLowerCase()))
-                .toList();
-    }
-
-    // wyszukiwanie uzytkowników po fragmencie nazwy
-    @Override
-    public List<User> findUserByEmailFragment(String emailFragment) {
-        return userRepository.findByPartEmail(emailFragment);
-    }
+    public List<User> findOlderThan(LocalDate date) {return userRepository.findOlderThan(date);}
 }

@@ -14,7 +14,6 @@ import java.time.LocalDate;
 public class User {
 
     @Id
-    //dodane bo inaczej user.setId(id) nie zadziałało
     @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable

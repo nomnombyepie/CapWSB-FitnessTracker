@@ -26,17 +26,10 @@ public interface UserProvider {
 
     /**
      * Retrieves all users.
-     *
      * @return An {@link Optional} containing the all users,
      */
     List<User> findAllUsers();
 
-    //dodanie wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
-    List<User> findUsersOlderThan(LocalDate date);
-
-    //wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter
-    List<User> findUsersByEmailWoCase(String emailFragment);
-
-    // wyszukiwanie uzytkowników po fragmencie nazwy
-    List<User> findUserByEmailFragment(String emailFragment);
+    // older than
+    List<User> findOlderThan(LocalDate date);
 }
