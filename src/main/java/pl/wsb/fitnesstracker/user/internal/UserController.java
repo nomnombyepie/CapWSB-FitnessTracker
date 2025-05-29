@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/users")
 @RequiredArgsConstructor
-class UserController {
+class UserController<UserShortDto> {
 
     private final UserServiceImpl userService;
 
@@ -35,6 +35,7 @@ class UserController {
         return userService.findAllUsers()
                 .stream()
                 .map(userMapper::toSimpleUser)
+//                .map(userMapper::toSimpleDto)
                 .toList();
     }
 
@@ -71,6 +72,20 @@ class UserController {
         User user = userMapper.toEntity(userDto);
         return userMapper.toDto(userService.crtUser(user));
     }
+
+
+//
+
+
+
+//    @GetMapping("/older/{date}")
+//    public List<UserDto> findUsersOlderThan(@PathVariable LocalDate date) {
+//        return userService.findAllUsers().stream()
+//                .filter(user -> user.getBirthdate().isBefore(date))
+//                .map(userMapper::toDto)
+//                .toList();
+//    }
+    //upd
     //upd user
     @PutMapping("/{id}")
     public UserDto updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {

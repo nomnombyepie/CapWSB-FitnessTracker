@@ -29,4 +29,30 @@ interface UserRepository extends JpaRepository<User, Long> {
                 .filter(user -> user.getBirthdate().isBefore(date))
                 .collect(Collectors.toList());
     }
+
+    // szukanie po fragmencie nazwy
+    default List<User> findByPartEmail(String emailFragment) {
+        return findAll().stream()
+                .filter(user -> user.getEmail() != null && user.getEmail().toLowerCase().contains(emailFragment.toLowerCase()))
+                .toList();
+    }
+
+    default List<User> findByFirstAndLastName(String firstName, String lastName) {
+        return findAll().stream()
+                .filter(u -> u.getFirstName().equalsIgnoreCase(firstName)
+                        && u.getLastName().equalsIgnoreCase(lastName))
+                .collect(Collectors.toList());
+    }
+
+    default List<User> findByBirthdate(LocalDate birthdate) {
+        return findAll().stream()
+                .filter(u -> u.getBirthdate().isEqual(birthdate))
+                .collect(Collectors.toList());
+    }
+
+    default List<User> findByEmailContainingIgnoreCase(String fragment) {
+        return null;
+    }
+
+
 }
