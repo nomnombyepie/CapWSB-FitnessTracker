@@ -41,6 +41,13 @@ class UserServiceImpl implements UserService, UserProvider {
     public void dltUser(final Long userId) {log.info("Deleting User ID {}", userId); userRepository.deleteById(userId);
     }
 
+    @Override
+    public List<User> findByEmailFragment(String fragment) {
+        return userRepository.findAll().stream()
+                .filter(user -> user.getEmail().toLowerCase().contains(fragment.toLowerCase()))
+                .toList();
+    }
+
 
 
     @Override
@@ -61,4 +68,32 @@ class UserServiceImpl implements UserService, UserProvider {
     // older than
     @Override
     public List<User> findOlderThan(LocalDate date) {return userRepository.findOlderThan(date);}
+
+    @Override
+    public List<User> findByFirstName(String firstName) {
+        return userRepository.findByFirstNameIgnoreCase(firstName);
+    }
+
+    @Override
+    public List<User> findByName(String firstName) {
+        String lowerFirstName = firstName.toLowerCase();
+        return userRepository.findAll().stream()
+                .filter(user -> user.getFirstName() != null && user.getFirstName().toLowerCase().contains(lowerFirstName))
+                .toList();
+    }
+
+    @Override
+    public List<User> findBySurname(String surname) {
+        return userRepository.findAll().stream()
+                .filter(user -> user.getLastName().equalsIgnoreCase(surname))
+                .toList();
+    }
+    @Override
+    public List<User> findByBirthdate(LocalDate birthdate) {
+        return userRepository.findAll().stream()
+                .filter(user -> user.getBirthdate().equals(birthdate))
+                .toList();
+    }
+
+
 }

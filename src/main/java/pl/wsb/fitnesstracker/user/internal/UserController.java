@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/users")
 @RequiredArgsConstructor
-class UserController<UserShortDto> {
+class UserController {
 
     private final UserServiceImpl userService;
 
@@ -45,6 +45,39 @@ class UserController<UserShortDto> {
         return userMapper.toDto(userService.getUser(id)
                 .orElseThrow(() -> new UserNotFoundException(id)));
     }
+    // wyszukiwanie po imieniu
+    @GetMapping("/search/name")
+    public List<UserDto> getUsersByName(@RequestParam String name) {
+
+        return userService.findByFirstName(name).stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+    // wyszukiwanie po nazwisku
+    @GetMapping("/search/surname")
+    public List<UserDto> getUsersBySurname(@RequestParam String surname) {
+        return userService.findBySurname(surname).stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+    // wyszukiwanie po dacie urodzenia (yyyy-MM-dd)
+    @GetMapping("/search/birthdate")
+    public List<UserDto> getUsersByBirthdate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthdate) {
+        return userService.findByBirthdate(birthdate).stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+    // wyszukiwanie po fragmencie e-maila
+    @GetMapping("/search/email")
+    public List<UserDto> getUsersByEmailFragment(@RequestParam String fragment) {
+        return userService.findByEmailFragment(fragment).stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
 
     // szukanie uzytkownika po email
     @GetMapping("/email")

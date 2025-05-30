@@ -23,6 +23,9 @@ interface UserRepository extends JpaRepository<User, Long> {
                 .findFirst();
     }
 
+    List<User> findByFirstNameIgnoreCase(String firstName);
+
+
     // older than
     default List<User> findOlderThan(LocalDate date) {
         return findAll().stream()

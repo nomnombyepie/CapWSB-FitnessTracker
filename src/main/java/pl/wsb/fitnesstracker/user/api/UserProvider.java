@@ -6,6 +6,8 @@ import java.util.Optional;
 
 public interface UserProvider {
 
+    List<User> findByEmailFragment(String fragment);
+
     /**
      * Retrieves a user based on their ID.
      * If the user with given ID is not found, then {@link Optional#empty()} will be returned.
@@ -32,4 +34,6 @@ public interface UserProvider {
 
     // older than
     List<User> findOlderThan(LocalDate date);
+
+    List<User> findByName(String name);
 }
