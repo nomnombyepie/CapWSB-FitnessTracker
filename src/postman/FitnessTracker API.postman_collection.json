@@ -1,0 +1,377 @@
+{
+	"info": {
+		"_postman_id": "d24a500a-e509-4a96-bc98-13e5a36a899d",
+		"name": "FitnessTracker API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33190923"
+	},
+	"item": [
+		{
+			"name": "wszyscy użytkownicy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users"
+					]
+				},
+				"description": "pobiera wszystkich użytkowników"
+			},
+			"response": []
+		},
+		{
+			"name": "simple użytkownicy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/simple",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"simple"
+					]
+				},
+				"description": "pobiera uproszczoną wersję użytkowników"
+			},
+			"response": []
+		},
+		{
+			"name": "użytkownicy po id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"1"
+					]
+				},
+				"description": "users/{id}"
+			},
+			"response": []
+		},
+		{
+			"name": "po imieniu",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/search/name?name=Ethan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"search",
+						"name"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Emma",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "Ethan"
+						},
+						{
+							"key": "name ",
+							"value": "Olivia",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "Daniel",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "...",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "po nazwisku",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/search/surname?surname=Johnson",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"search",
+						"surname"
+					],
+					"query": [
+						{
+							"key": "surname",
+							"value": "Johnson"
+						},
+						{
+							"key": "surname",
+							"value": "Taylor",
+							"disabled": true
+						},
+						{
+							"key": "surname",
+							"value": "Davis",
+							"disabled": true
+						},
+						{
+							"key": "surname",
+							"value": "Thomas",
+							"disabled": true
+						},
+						{
+							"key": "surname",
+							"value": "...",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "po emailu",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/email?email=Olivia.Davis@domain.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "Emma.Johnson@domain.com",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "Ethan.Taylor@domain.com",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "Olivia.Davis@domain.com"
+						},
+						{
+							"key": "email",
+							"value": "...",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fragment email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/search/email?fragment=Oliv",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"search",
+						"email"
+					],
+					"query": [
+						{
+							"key": "fragment",
+							"value": "emma",
+							"disabled": true
+						},
+						{
+							"key": "fragment",
+							"value": "Oliv"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "po dacie urodzenia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/search/birthdate?birthdate=1997-05-31",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"search",
+						"birthdate"
+					],
+					"query": [
+						{
+							"key": "birthdate",
+							"value": "1997-05-31"
+						},
+						{
+							"key": "birthdate",
+							"value": "1974-05-31",
+							"disabled": true
+						},
+						{
+							"key": "birthdate",
+							"value": "...",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "starszy niż",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/older/2000-05-31",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"older",
+						"2000-05-31"
+					]
+				},
+				"description": "older/{rrrr-mm-dd}"
+			},
+			"response": []
+		},
+		{
+			"name": "dodaj nowego użytkownika",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"Jake\",\r\n  \"lastName\": \"Pomidor\",\r\n  \"birthdate\": \"2000-05-01\",\r\n  \"email\": \"xcv@xcv.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users"
+					]
+				},
+				"description": "body-> raw->  \n{  \n\"firstName\": \"...\",  \n\"lastName\": \"...\",  \n\"birthdate\": \"rrrr-mm-dd\",  \n\"email\": \" ... \"  \n}"
+			},
+			"response": []
+		},
+		{
+			"name": "aktualizacja użytkownika",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"Jake\",\r\n  \"lastName\": \"Pomidor\",\r\n  \"birthdate\": \"2000-05-01\",\r\n  \"email\": \"Jake.Pomidor@xcv.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/users/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"11"
+					]
+				},
+				"description": "body -> row json  \n{  \"firstName\": \"Jake\",\n\n  \"lastName\": \"Pomidor\",\n\n  \"birthdate\": \"2000-05-01\",\n\n  \"email\": \"Jake.Pomidor@xcv.com\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "usówanie po ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"11"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
